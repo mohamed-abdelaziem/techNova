@@ -24,6 +24,8 @@
             'bg-red-500': item?.status?.toLowerCase() === 'rejected',
             'bg-green-500': item?.status?.toLowerCase() === 'active',
             'bg-black': item?.status?.toLowerCase() === 'created',
+            'bg-lime-600': item?.status?.toLowerCase() === 'winner',
+            'bg-blue-900': item?.status?.toLowerCase() === 'accepted',
           }"
         >
           {{ item.status }}

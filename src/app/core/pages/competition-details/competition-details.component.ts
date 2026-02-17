@@ -25,7 +25,7 @@ export class CompetitionDetailsComponent {
   private competitionService = inject(CompetitionService);
   private toast = inject(ToastrService);
   private activedRoute = inject(ActivatedRoute);
-  private authService = inject(AuthService);
+   authService = inject(AuthService);
   projectsArr : any[] = [];
   competition!: ICompetition;
   selectedId = signal<any>(undefined);
@@ -34,6 +34,7 @@ export class CompetitionDetailsComponent {
   getSpecificCompetitionLoading = signal<boolean>(false);
   createCompetitionLoading = signal<boolean>(false);
   platformId = inject(PLATFORM_ID);
+
 
   constructor() {
     debugger;
