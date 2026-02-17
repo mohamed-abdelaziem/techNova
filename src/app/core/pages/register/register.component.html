@@ -1,0 +1,43 @@
+<div class="w-[90%] md:w-1/2  px-4 py-2 rounded my-10 mx-auto bg-white form">
+<h1 class="text-[25px] font-semibold text-blue-800">Register Form : </h1>
+
+<form (ngSubmit)="onRegister()"  class="mt-5 space-y-2">
+<div class="full-name space-y-1">
+<label for="full-name" class="font-semibold block">Full Name: </label>
+<input type="text" name="full-name" [(ngModel)]="registerForm.fullName" id="full-name" placeholder="Enter Your Full Name...." class="block w-full rounded border border-blue-800">
+</div>
+
+<div class="email space-y-1">
+<label for="email" class="font-semibold block">Email: </label>
+<input type="email" name="email" [(ngModel)]="registerForm.email" id="email" placeholder="Enter Your Email...." class="block w-full rounded border border-blue-800">
+</div>
+
+<div class="password space-y-1">
+<label for="password" class="font-semibold block">Password: </label>
+<input type="password" id="password" name="password" [(ngModel)]="registerForm.password" placeholder="Enter Your Password...." class="block w-full rounded border border-blue-800">
+</div>
+
+
+<div class="collage-name space-y-1">
+<label for="collage-name" class="font-semibold block">Collage Name: </label>
+<input type="text" id="collage-name" name="collage-name" [(ngModel)]="registerForm.collageName"  placeholder="Enter Your collage name...." class="block w-full rounded border border-blue-800">
+</div>
+
+
+
+<button
+  [disabled]="isloading()"
+  
+  type="submit"
+  class="flex items-center justify-center w-full mx-auto gap-2 bg-blue-700 px-4 py-2 rounded transition-all duration-500 text-white hover:text-white font-semibold cursor-pointer hover:bg-blue-800">
+  @if (isloading()) {
+    Loading...
+  }@else {
+    Create Acount
+  }
+</button>
+<p class="text-center mt-2">Already have an account? <a routerLink="/login" class="text-blue-700 font-semibold text-center cursor-pointer">Sign In</a></p>
+
+
+</form>
+</div>

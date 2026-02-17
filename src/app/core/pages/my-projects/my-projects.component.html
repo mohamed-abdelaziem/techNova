@@ -1,0 +1,194 @@
+<div class="max-w-7xl mx-auto p-4 space-y-8">
+  <h1 class="text-[25px] font-semibold text-blue-800">All Projects:</h1>
+ @if (myProjectList().length == 0) {
+    <h1 class="text-[30px] font-semibold text-center text-red-500">Not Found Projects</h1>
+ }@else {
+     <div class="grid md:grid-cols-3 gap-2 w-[80%] mx-auto">
+    @for (item of myProjectList(); track $index) {
+      <div
+        class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300"
+      >
+        <!-- Header -->
+        <div class="bg-blue-700 text-white p-4 flex justify-between items-center">
+          <h2 class="text-lg font-semibold flex items-center gap-2">
+            <i class="fa-solid fa-diagram-project"></i>
+            Project Submission
+          </h2>
+
+          <span class="bg-white/20 px-3 py-1 rounded-full text-sm capitalize">
+            {{ item.status }}
+          </span>
+        </div>
+
+        <!-- Body -->
+        <div class="p-5 space-y-4">
+          <!-- Title -->
+          <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+            <i class="fa-solid fa-file-lines text-blue-700"></i>
+            {{ item.projectTitle }}
+          </h3>
+
+          <!-- Description -->
+          <p class="text-gray-600 leading-relaxed">
+            {{ item.description }}
+          </p>
+
+          <!-- Info Grid -->
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div class="flex items-center gap-2 text-gray-700">
+              <i class="fa-solid fa-calendar text-blue-700"></i>
+              {{ item.submissionDate | date: 'mediumDate' }}
+            </div>
+
+            <div class="flex items-center gap-2 text-gray-700">
+              <i class="fa-solid fa-trophy text-blue-700"></i>
+              Rank: {{ item.rank }}
+            </div>
+          </div>
+
+          <!-- Github Link -->
+          <a
+            [href]="item.githubLink"
+            target="_blank"
+            class="flex items-center justify-center gap-2 w-full bg-gray-100 hover:bg-blue-700 hover:text-white text-gray-800 py-2 rounded-lg transition-all duration-300 font-medium"
+          >
+            <i class="fa-brands fa-github"></i>
+            View on GitHub
+          </a>
+
+          <!-- Action Buttons -->
+          <div class="flex gap-3 pt-3">
+            <!-- Update -->
+            <button
+            (click)="handelUpdate(item?.submissionId)"
+              class="flex-1 cursor-pointer flex items-center justify-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-black py-2 rounded-lg transition-all duration-300 font-semibold"
+            >
+              <i class="fa-solid fa-pen"></i>
+              Update
+            </button>
+
+            <!-- Delete -->
+            <button
+            (click)="deleteProject(item?.submissionId)"
+              class="flex-1 cursor-pointer flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg transition-all duration-300 font-semibold"
+            >
+              <i class="fa-solid fa-trash"></i>
+              Delete
+            </button>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="bg-gray-50 px-5 py-3 text-xs text-gray-500 flex justify-between">
+          <span>ID: {{ item.submissionId }}</span>
+          <span>Competition: {{ item.competitionId }}</span>
+        </div>
+      </div>
+    }
+  </div>
+ }
+</div>
+
+
+
+
+@if (updateModelShow()) {
+<div class="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-lg rounded-xl shadow-xl p-6 max-h-[90vh] overflow-y-auto">
+      <h2 class="text-xl md:text-2xl font-semibold text-blue-800 mb-4">Update Submission :</h2>
+
+      <form (submit)="updateProject()" class="space-y-4" [formGroup]="updateProjectForm" >
+       <!-- Project Title -->
+          <div>
+            <label class="font-medium flex items-center gap-2 mb-2">
+              <i class="fa-solid fa-folder-open text-blue-700"></i>
+              Project Title
+            </label>
+
+            <input
+              formControlName="projectTitle"
+              name="projectTitle"
+              type="text"
+              placeholder="Enter your project title..."
+              class="w-full border border-gray-300 rounded  px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-700"
+            />
+          </div>
+
+        
+
+         <!-- Description -->
+          <div>
+            <label class="font-medium flex items-center gap-2 mb-2">
+              <i class="fa-solid fa-align-left text-blue-700"></i>
+              Description
+            </label>
+
+            <textarea
+              formControlName="description"
+              name="description"
+              rows="4"
+              placeholder="Describe your project..."
+              class="w-full border border-gray-300 rounded  px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-700"
+            ></textarea>
+          </div>
+
+          <!-- GitHub Link -->
+          <div>
+            <label class="font-medium flex items-center gap-2 mb-2">
+              <i class="fa-brands fa-github text-blue-700"></i>
+              GitHub Link
+            </label>
+
+            <input
+              formControlName="githubLink"
+              name="githubLink"
+              type="url"
+              placeholder="https://github.com/your-project"
+              class="w-full border border-gray-300 rounded  px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-700"
+            />
+          </div>
+
+          <!-- submissionDate -->
+          <div>
+            <label class="font-medium flex items-center gap-2 mb-2">
+              <i class="fa-solid fa-clock text-blue-700"></i>
+              Submission Date
+            </label>
+
+            <input
+              formControlName="submissionDate"
+              name="submissionDate"
+              type="date"
+              class="w-full border border-gray-300 rounded  px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-700"
+            />
+          </div>
+
+        <div class="flex justify-end gap-3 pt-4">
+          <button
+            type="button"
+            (click)="updateModelShow.set(false)"
+            class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 cursor-pointer"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+           [disabled]="updateModelLoading()"
+           [class.opacity-50]="updateModelLoading()"
+            class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 flex items-center cursor-pointer gap-2"
+          >
+
+
+          @if (updateModelLoading()) {
+            Loading...
+          }@else {
+            Save
+          }
+            
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}

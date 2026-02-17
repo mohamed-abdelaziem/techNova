@@ -1,0 +1,322 @@
+<!-- hero section -->
+<div class="h-screen relative z-30 hero">
+  <div class="layer absolute w-full -z-10 bg-[#626cd6bf] h-full inset-0"></div>
+  <div class="max-w-7xl mx-auto h-full flex flex-col gap-4 justify-center md:items-start p-4">
+    <h1 class="text-[30px] md:text-[70px] font-semibold text-white">
+      Showcase Your <span class="text-blue-900">Innovation</span>
+    </h1>
+    <p class="text-white text-[18px]">
+      Join the most prestigious inter-college project competition and demonstrate your creative
+      solutions to real-world problems.
+    </p>
+
+    <div class="flex items-center gap-3">
+      <button
+        routerLink="/all-competitions"
+        class="flex items-center gap-2 bg-white px-4 py-2 rounded transition-all duration-500 text-brand font-semibold cursor-pointer hover:bg-blue-700 hover:text-white"
+      >
+        <i class="fa-solid fa-arrow-right-to-bracket"></i> <span>Browse Competition</span>
+      </button>
+      <button
+        routerLink="/register"
+        class="flex items-center gap-2 bg-blue-700 px-4 py-2 rounded transition-all duration-500 text-white font-semibold cursor-pointer hover:bg-blue-800"
+      >
+        <i class="fa-solid fa-user-plus"></i><span>Join Now</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- featured competitions -->
+<div class="max-w-7xl mx-auto p-4">
+  <div class="heading-center text-center w-fit mx-auto">
+    <h2 class="text-[30px] font-semibold">Featured Competitions</h2>
+    <div class="w-1/4 bg-brand mx-auto h-1 rounded my-1"></div>
+    <p>Participate in our ongoing competitions and showcase your talent</p>
+  </div>
+
+  <div class="grid md:grid-cols-3 my-5 md:my-10 gap-3">
+    @if (competitionsLoading()) {
+      @for (item of [0, 0, 0, 0, 0, 0]; track $index) {
+        <div class="box bg-[#e0f1ff] relative py-2 rounded-xl">
+          <!-- title -->
+          <span class="absolute right-2 h-6 w-24 rounded-xl skeleton"></span>
+
+          <div class="p-4 flex flex-col gap-4">
+            <!-- description -->
+            <div class="space-y-2">
+              <div class="h-4 w-full rounded skeleton"></div>
+              <div class="h-4 w-5/6 rounded skeleton"></div>
+              <div class="h-4 w-2/3 rounded skeleton"></div>
+            </div>
+
+            <!-- date -->
+            <div class="flex items-center gap-2 w-fit">
+              <i class="fa-regular fa-calendar-days text-gray-400 fa-fade"></i>
+              <div class="h-8 w-28 rounded-xl skeleton"></div>
+            </div>
+          </div>
+
+          <!-- button -->
+          <div class="border-t border-gray-400 py-2 px-4">
+            <div class="h-10 w-full rounded skeleton"></div>
+          </div>
+        </div>
+      }
+    } @else {
+      @for (item of competitions.slice(0, 6); track $index) {
+        <div
+          class="box bg-[#e0f1ff] relative py-2 rounded-xl hover:-translate-y-1.25 cursor-pointer"
+        >
+          <span class="bg-red-400 rounded-xl px-2 py-1 text-white absolute right-2">{{
+            item?.title
+          }}</span>
+          <div class="p-4 flex flex-col gap-4">
+            <p class="mt-5 line-clamp-1">{{ item?.description }}</p>
+            <span class="bg-blue-800 rounded-xl px-4 py-2 block w-fit text-white"
+              ><i class="fa-regular fa-calendar-days"></i>{{ item?.endDate }}</span
+            >
+          </div>
+
+          <div class="border-t border-gray-400 py-2">
+            <button
+              [routerLink]="['/competition-details', item.competitionId]"
+              class="flex w-full text-center items-center justify-center gap-2 bg-blue-700 px-4 py-2 rounded transition-all duration-500 text-white font-semibold cursor-pointer hover:bg-blue-800"
+            >
+              View Details
+            </button>
+          </div>
+        </div>
+      }
+    }
+  </div>
+
+  <button
+    routerLink="/all-competitions"
+    class="flex items-center justify-center w-fit mx-auto gap-2 bg-blue-700 px-4 py-2 rounded transition-all duration-500 text-white hover:text-white font-semibold cursor-pointer hover:bg-blue-800"
+  >
+    View All Competitions
+  </button>
+</div>
+
+<!-- how it works -->
+<div class="mx-auto p-4 bg-[#f8f9fa]">
+  <div class="heading-center text-center w-fit mx-auto">
+    <h2 class="text-[30px] font-semibold">How It Work</h2>
+    <div class="w-1/4 bg-brand mx-auto h-1 rounded my-1"></div>
+    <p>Follow these simple steps to participate in our competitions</p>
+  </div>
+
+  <div class="md:w-[90%] mx-auto grid md:grid-cols-4 my-5 md:my-10 gap-3">
+    <div
+      class="flex  flex-col items-center justify-center gap-3 box p-3 text-center bg-white relative py-2 rounded-xl hover:-translate-y-1.25 cursor-pointer"
+    >
+      <div
+        class="flex size-20 rounded-full bg-[#e6f0ff] items-center justify-center text-[30px] text-[#0d6efd]"
+      >
+        <i class="fa-solid fa-user-plus"></i>
+      </div>
+      <h3 class="text-[18px] font-semibold">1.Register</h3>
+      <p>Create an account and complete your profile with your college information.</p>
+    </div>
+    <div
+      class="flex  flex-col items-center justify-center gap-3 box p-3 text-center bg-white relative py-2 rounded-xl hover:-translate-y-1.25 cursor-pointer"
+    >
+      <div
+        class="flex size-20 rounded-full bg-[#e6f0ff] items-center justify-center text-[30px] text-[#0d6efd]"
+      >
+        <i class="fa-solid fa-trophy"></i>
+      </div>
+      <h3 class="text-[18px] font-semibold">2.Join Competition</h3>
+      <p>Browse available competitions and register for those that match your interests.</p>
+    </div>
+    <div
+      class="flex  flex-col items-center justify-center gap-3 box p-3 text-center bg-white relative py-2 rounded-xl hover:-translate-y-1.25 cursor-pointer"
+    >
+      <div
+        class="flex size-20 rounded-full bg-[#e6f0ff] items-center justify-center text-[30px] text-[#0d6efd]"
+      >
+        <i class="fa-solid fa-upload"></i>
+      </div>
+      <h3 class="text-[18px] font-semibold">3.Submit Project</h3>
+      <p>Work on your project and submit it before the deadline with all required materials.</p>
+    </div>
+    <div
+      class="flex  flex-col items-center justify-center gap-3 box p-3 text-center bg-white relative py-2 rounded-xl hover:-translate-y-1.25 cursor-pointer"
+    >
+      <div
+        class="flex size-20 rounded-full bg-[#e6f0ff] items-center justify-center text-[30px] text-[#0d6efd]"
+      >
+        <i class="fa-solid fa-ranking-star"></i>
+      </div>
+      <h3 class="text-[18px] font-semibold">4.Win Prizes</h3>
+      <p>Get your projects evaluated by experts and win recognition and exciting prizes.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Past Winners -->
+<div class="mx-auto p-4 bg-[#f8f9fa]">
+  <div class="heading-center text-center  mx-auto">
+    <h2 class="text-[30px] font-semibold">Past Winners</h2>
+    <div class="w-1/4 bg-brand mx-auto h-1 rounded my-1"></div>
+    <p>Check out our previous competition winners and their amazing projects</p>
+  </div>
+
+  <div class="mx-auto grid md:grid-cols-2 my-5 md:my-10 gap-3">
+    <div
+      class="flex flex-col md:flex-row gap-3 box min-h-50 bg-white rounded-xl hover:-translate-y-1.25 cursor-pointer"
+    >
+      <div class="box-image w-full md:w-1/2">
+        <img src="./images/hero-bg.jpg" class="object-cover w-full block h-full" alt="" />
+      </div>
+
+      <div class="box-details space-y-2 p-4">
+        <h4 class="text-[20px] font-semibold">Smart Health Monitoring System</h4>
+        <p>
+          An IoT-based health monitoring system that helps track vital signs and sends alerts to
+          caregivers.
+        </p>
+        <div class="flex items-center flex-wrap gap-2">
+          <span
+            class="flex items-center justify-center px-2 py-1 rounded-lg text-white bg-[#0dcaf0]"
+            >Iot</span
+          >
+          <span
+            class="flex items-center justify-center px-2 py-1 rounded-lg text-white bg-[#0dcaf0]"
+            >Health Care</span
+          >
+          <span
+            class="flex items-center justify-center px-2 py-1 rounded-lg text-white bg-[#0dcaf0]"
+            >Embedded Systems</span
+          >
+        </div>
+        <p class="text-[#333]">By Team Innovators from Stanford University</p>
+        <p class="px-2 py-1 rounded-lg text-white bg-[#ffc107] w-fit">1st Place - Winter 2024</p>
+      </div>
+    </div>
+
+    <div
+      class="flex flex-col md:flex-row gap-3 box min-h-50 bg-white rounded-xl hover:-translate-y-1.25 cursor-pointer"
+    >
+      <div class="box-image w-full md:w-1/2">
+        <img src="./images/eco-bg.jpg" class="object-cover w-full block h-full" alt="" />
+      </div>
+
+      <div class="box-details space-y-2 p-4">
+        <h4 class="text-[20px] font-semibold">EcoTrack - Environmental Monitoring</h4>
+        <p>
+          A comprehensive solution for tracking and analyzing environmental data to promote
+          sustainability.
+        </p>
+        <div class="flex items-center flex-wrap gap-2">
+          <span
+            class="flex items-center justify-center px-2 py-1 rounded-lg text-white bg-[#0dcaf0]"
+            >Environmental</span
+          >
+          <span
+            class="flex items-center justify-center px-2 py-1 rounded-lg text-white bg-[#0dcaf0]"
+            >Data Science</span
+          >
+          <span
+            class="flex items-center justify-center px-2 py-1 rounded-lg text-white bg-[#0dcaf0]"
+            >Mobile App</span
+          >
+        </div>
+        <p class="text-[#333]">By Team GreenTech from MIT</p>
+        <p class="px-2 py-1 rounded-lg text-white bg-[#ffc107] w-fit">1st Place - Summer 2024</p>
+      </div>
+    </div>
+  </div>
+  <button
+    routerLink="/past-winners"
+    class="flex items-center justify-center w-fit mx-auto gap-2 bg-blue-700 px-4 py-2 rounded transition-all duration-500 text-white hover:text-white font-semibold cursor-pointer hover:bg-blue-800"
+  >
+    View All Winners
+  </button>
+</div>
+
+<!-- What Participants Say -->
+<div class="mx-auto p-4 bg-[#f8f9fa]">
+  <div class="heading-center text-center w-fit mx-auto">
+    <h2 class="text-[30px] font-semibold">What Participants Say</h2>
+    <div class="w-1/4 bg-brand mx-auto h-1 rounded my-1"></div>
+    <p>Hear from our past participants about their experience</p>
+  </div>
+
+  <div class="md:w-[80%] mx-auto grid md:grid-cols-3 my-5 md:my-10 gap-3">
+    <div
+      class="flex flex-col gap-3 p-2 box min-h-50 bg-white rounded-xl hover:-translate-y-1.25 cursor-pointer"
+    >
+      <i class="fa-solid fa-quote-left text-[40px] text-[#aaccfe]"></i>
+      <p>
+        Participating in TechNova's AI competition was a game-changer for me. The feedback from
+        industry experts helped me refine my skills and opened doors to amazing opportunities.
+      </p>
+      <div class="flex items-center gap-3">
+        <img src="./images/woman.jpg" class="size-10 rounded-full object-cover" alt="" />
+        <div class="flex flex-col gap-1">
+          <p class="font-semibold">Michael Johnson</p>
+          <p class="text-[#333]">Computer Science, Stanford</p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex flex-col gap-3 p-2 box min-h-50 bg-white rounded-xl hover:-translate-y-1.25 cursor-pointer"
+    >
+      <i class="fa-solid fa-quote-left text-[40px] text-[#aaccfe]"></i>
+      <p>
+        The competition platform was easy to use and the organizers were incredibly supportive throughout the process. I learned so much from collaborating with my teammates on our project.
+      </p>
+      <div class="flex items-center gap-3">
+        <img src="./images/man.jpg" class="size-10 rounded-full object-cover" alt="" />
+        <div class="flex flex-col gap-1">
+          <p class="font-semibold">David Chen</p>
+          <p class="text-[#333]">Computer Engineering, Berkeley</p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex flex-col gap-3 p-2 box min-h-50 bg-white rounded-xl hover:-translate-y-1.25 cursor-pointer"
+    >
+      <i class="fa-solid fa-quote-left text-[40px] text-[#aaccfe]"></i>
+      <p>
+        Winning the Web Development Hackathon gave our team incredible exposure. We've since turned our project into a startup and secured funding thanks to the connections we made!
+      </p>
+      <div class="flex items-center gap-3">
+        <img src="./images/woman-1.jpg" class="size-10 rounded-full object-cover" alt="" />
+        <div class="flex flex-col gap-1">
+          <p class="font-semibold">Sarah Williams</p>
+          <p class="text-[#333]">Electrical Engineering, MIT</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button
+    routerLink="/past-winners"
+    class="flex items-center justify-center w-fit mx-auto gap-2 bg-blue-700 px-4 py-2 rounded transition-all duration-500 text-white hover:text-white font-semibold cursor-pointer hover:bg-blue-800"
+  >
+    View All Winners
+  </button>
+</div>
+<!-- CTA FOOTER -->
+<section class="bg-blue-700 text-white text-center py-16">
+
+  <div class="max-w-3xl mx-auto px-4">
+
+    <h2 class="text-3xl md:text-4xl font-semibold">
+      Ready to Showcase Your Talent?
+    </h2>
+
+    <p class="mt-4 text-lg opacity-90">
+      Join thousands of students competing and innovating.
+    </p>
+
+    <button
+      routerLink="/register"
+      class="mt-8 bg-white cursor-pointer text-blue-700 px-8 py-3 rounded font-semibold hover:bg-gray-100 transition"
+    >
+      Get Started Now
+    </button>
+
+  </div>

@@ -1,0 +1,110 @@
+<div class="max-w-7xl mx-auto p-4 space-y-8">
+  <h1 class="text-[25px] font-semibold text-blue-800">All Projects For This Competition:</h1>
+  <!-- project card -->
+
+  @if (projectsArr.length == 0) {
+    <h1 class="text-[30px] font-semibold text-center text-red-500">Not Found Projects</h1>
+  }@else {
+    <div class="grid md:grid-cols-3 gap-2 w-[90%] mx-auto">
+   @for (item of projectsArr; track $index) {
+     <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300">
+      <!-- Header -->
+      <div class="bg-blue-700 text-white p-4 flex justify-between items-center">
+        <h2 class="text-lg font-semibold flex items-center gap-2">
+          <i class="fa-solid fa-user-shield"></i>
+          Admin Review Panel
+        </h2>
+
+        <!-- Status Badge -->
+        <span
+          class="px-3 py-1 rounded-full text-sm font-semibold capitalize"
+          [class]="{
+            'bg-yellow-400': item?.status?.toLowerCase() === 'pending',
+            'bg-blue-500': item?.status?.toLowerCase() === 'approved',
+            'bg-red-500': item?.status?.toLowerCase() === 'rejected',
+            'bg-green-500': item?.status?.toLowerCase() === 'active',
+            'bg-black': item?.status?.toLowerCase() === 'created',
+          }"
+        >
+          {{ item.status }}
+        </span>
+      </div>
+
+      <!-- Body -->
+      <div class="p-5 space-y-4">
+        <!-- Title -->
+        <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+          <i class="fa-solid fa-file-lines text-blue-700"></i>
+          {{ item.projectTitle }}
+        </h3>
+
+        <!-- Description -->
+        <p class="text-gray-600 leading-relaxed">
+          {{ item.description }}
+        </p>
+
+        <!-- Github -->
+        <a
+          [href]="item.githubLink"
+          target="_blank"
+          class="flex items-center justify-center gap-2 w-full bg-gray-100 hover:bg-blue-700 hover:text-white text-gray-800 py-2 rounded-lg transition-all duration-300 font-medium"
+        >
+          <i class="fa-brands fa-github"></i>
+          View GitHub Project
+        </a>
+
+        <!-- Info Row -->
+        <div class="flex justify-between text-sm text-gray-600">
+         
+
+          <span>
+            <i class="fa-solid fa-trophy text-blue-700"></i>
+            Rank: {{ item.rank }}
+          </span>
+        </div>
+
+        <!-- Admin Actions -->
+        <div class="flex gap-3 pt-4">
+          <!-- Approve -->
+          <button
+          [disabled]="item.status.toLowerCase() =='winner'"
+          [class.opacity-500]="item.status.toLowerCase() =='winner'"
+          (click)="approveProject(item.submissionId,item)"
+            class="flex-1 flex items-center cursor-pointer justify-center gap-2 bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg font-semibold transition-all duration-300"
+          >
+            <i class="fa-solid fa-check"></i>
+            Approve
+          </button>
+
+          <!-- Reject -->
+          <button
+            [disabled]="item.status.toLowerCase() =='winner'"
+          [class.opacity-500]="item.status.toLowerCase() =='winner'"
+            (click)="rejectProject(item?.submissionId,item)"
+            class="flex-1 flex cursor-pointer items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg font-semibold transition-all duration-300"
+          >
+            <i class="fa-solid fa-xmark"></i>   
+            Reject
+          </button>
+
+        </div>
+        <button (click)="makeWinner(item?.submissionId,item?.rank , item)" class="w-full flex-1 flex cursor-pointer items-center justify-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded-lg font-semibold transition-all duration-300">Make Winner <i class="fa-solid fa-check"></i></button>
+
+      </div>
+
+      <!-- Footer -->
+      <div class="bg-gray-50 px-5 py-3 text-xs text-gray-500 flex justify-between">
+        <span>Submission ID: {{ item.submissionId }}</span>
+        <span>User Name: {{ item?.fullName }}</span>
+      </div>
+    </div>
+   }
+  </div>
+  }
+</div>
+
+@if (getProjectLoading()) {
+<div class="bg-black/80 flex items-center justify-center fixed inset-0 z-10000">
+  <i class="fa fa-spin fa-spinner text-[70px] text-blue-800"></i>
+</div>
+}

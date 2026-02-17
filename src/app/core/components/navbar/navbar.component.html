@@ -1,0 +1,197 @@
+<nav class="bg-blue-800 sticky w-full z-50 top-0 start-0">
+  <div
+    class="max-w-7xl flex flex-wrap items-center md:justify-center justify-between lg:justify-between gap-2 lg:gap-4 mx-auto p-4"
+  >
+    <a
+      routerLink="/home"
+      class="cursor-pointer flex items-center md:ms-auto m-0 space-x-3 rtl:space-x-reverse"
+    >
+      <span class="self-center text-xl text-white text-[30px] font-semibold whitespace-nowrap"
+        ><i class="fa-solid fa-rocket"></i>TechNova</span
+      >
+    </a>
+    <button
+      data-collapse-toggle="navbar-default"
+      type="button"
+      class="md:hidden inline-flex items-center w-12.5 h-12.5 cursor-pointer justify-center text-[25px] text-body rounded-base hover:text-heading focus:outline-none focus:ring-0 focus:ring-transparent"
+      aria-controls="navbar-default"
+      aria-expanded="false"
+    >
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="hidden w-full md:block md:w-auto md:mx-auto lg:me-auto lg:grow" id="navbar-default">
+      <ul
+        class="font-medium flex flex-col gap-y-2 md:gap-0 p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-transparent"
+      >
+        <li>
+          <a
+            routerLink="/home"
+            routerLinkActive="!text-black"
+            class="block py-2 px-3 hover:text-white md:text-white hover:bg-blue-700 md:hover:bg-transparent rounded md:bg-transparent md:p-0"
+            aria-current="page"
+            >Home</a
+          >
+        </li>
+        @if (authService.userRole().toLowerCase() === 'admin') {
+          <li>
+            <a
+              routerLink="/competitions"
+              routerLinkActive="!text-black"
+              class="block py-2 px-3 hover:text-white md:text-white rounded hover:bg-blue-700 md:hover:bg-transparent md:border-0 md:hover:text-white md:p-0 md:dark:hover:bg-transparent"
+              >Competitions</a
+            >
+          </li>
+        }@else {
+          <li>
+            <a
+              routerLink="/all-competitions"
+              routerLinkActive="text-black!"
+              class="block py-2 px-3 hover:text-white md:text-white rounded hover:bg-blue-700 md:hover:bg-transparent md:border-0 md:hover:text-white md:p-0 md:dark:hover:bg-transparent"
+              >All Competitions</a
+            >
+          </li>
+        }
+        <li>
+          <a
+            routerLink="/past-winners"
+            routerLinkActive="text-black!"
+            class="block py-2 px-3 hover:text-white md:text-white rounded hover:bg-blue-700 md:hover:bg-transparent md:border-0 md:hover:text-white md:p-0 md:dark:hover:bg-transparent"
+            >Past Winners</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/about"
+            routerLinkActive="text-black!"
+            class="block py-2 px-3 hover:text-white md:text-white rounded hover:bg-blue-700 md:hover:bg-transparent md:border-0 md:hover:text-white md:p-0 md:dark:hover:bg-transparent"
+            >About</a
+          >
+        </li>
+
+        @if (authService.isLogin()) {
+          <button
+            id="dropdownDividerButton-two"
+            data-dropdown-toggle="dropdownDivider-two"
+            class="md:hidden inline-flex items-center justify-center gap-2 bg-white px-4 py-2 rounded transition-all duration-500 text-brand font-semibold cursor-pointer hover:bg-blue-700 hover:text-white"
+            type="button"
+          >
+            <i class="fa-solid fa-user"></i>
+            {{authService.userRole()}}
+          </button>
+
+          <!-- Dropdown menu -->
+          <div
+            id="dropdownDivider-two"
+            class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base divide-y divide-default-medium shadow-lg w-[80%] mx-auto"
+          >
+            <ul
+              class="p-2 text-sm text-body font-medium"
+              aria-labelledby="dropdownDividerButton-two"
+            >
+             @if (authService.userRole().toLowerCase() ==='admin') {
+               <li>
+                <a
+                  routerLink="/my-projects"
+                  class="cursor-pointer inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                  >The Projects</a
+                >
+              </li>
+             }@else{
+               <li>
+                <a
+                  routerLink="/my-projects"
+                  class="cursor-pointer inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                  >My Projects</a
+                >
+              </li>
+             }
+            </ul>
+            <div class="p-2 text-sm text-body font-medium">
+              <a
+                (click)="authService.logOut()"
+                class="inline-flex items-center w-full p-2 cursor-pointer hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                >Sign Out</a
+              >
+            </div>
+          </div>
+        } @else {
+          <div class="items-center gap-3 flex md:hidden">
+            <button
+              routerLink="/login"
+              class="flex items-center gap-2 bg-white px-4 py-2 rounded transition-all duration-500 text-brand font-semibold cursor-pointer hover:bg-blue-700 hover:text-white"
+            >
+              <i class="fa-solid fa-arrow-right-to-bracket"></i> <span>Login</span>
+            </button>
+            <button
+              routerLink="/register"
+              class="flex items-center gap-2 bg-blue-700 px-4 py-2 rounded transition-all duration-500 text-white hover:text-brand font-semibold cursor-pointer hover:bg-white"
+            >
+              <i class="fa-solid fa-user-plus"></i><span>Register</span>
+            </button>
+          </div>
+        }
+      </ul>
+    </div>
+
+    @if (authService.isLogin()) {
+      <button
+        id="dropdownDividerButton"
+        data-dropdown-toggle="dropdownDivider"
+        class="hidden md:inline-flex items-center justify-center gap-2 bg-white px-4 py-2 rounded transition-all duration-500 text-brand font-semibold cursor-pointer hover:bg-blue-700 hover:text-white"
+        type="button"
+      >
+        <i class="fa-solid fa-user"></i>
+        {{authService.userRole()}}
+      </button>
+
+      <!-- Dropdown menu -->
+      <div
+        id="dropdownDivider"
+        class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base divide-y divide-default-medium shadow-lg w-44"
+      >
+        <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownDividerButton">
+      
+           @if (authService.userRole().toLowerCase() =='admin') {
+               <li>
+                <a
+                  routerLink="/my-projects"
+                  class="cursor-pointer inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                  >The Projects</a
+                >
+              </li>
+             }@else{
+               <li>
+                <a
+                  routerLink="/my-projects"
+                  class="cursor-pointer inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                  >My Projects</a
+                >
+              </li>
+             }
+        </ul>
+        <div class="p-2 text-sm text-body font-medium">
+          <a
+            class="inline-flex items-center w-full p-2 cursor-pointer hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+            (click)="authService.logOut()"
+            >Sign Out</a
+          >
+        </div>
+      </div>
+    } @else {
+      <div class="hidden items-center gap-3 md:flex">
+        <button
+          routerLink="/login"
+          class="flex items-center gap-2 bg-white px-4 py-2 rounded transition-all duration-500 text-brand font-semibold cursor-pointer hover:bg-blue-700 hover:text-white"
+        >
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> <span>Login</span>
+        </button>
+        <button
+          routerLink="/register"
+          class="flex items-center gap-2 bg-blue-700 px-4 py-2 rounded transition-all duration-500 text-white hover:text-brand font-semibold cursor-pointer hover:bg-white"
+        >
+          <i class="fa-solid fa-user-plus"></i><span>Register</span>
+        </button>
+      </div>
+    }
+  </div>
+</nav>
