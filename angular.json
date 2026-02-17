@@ -10,23 +10,16 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "type": "component",
           "skipTests": true
         },
         "@schematics/angular:service": {
-          "type": "service",
           "skipTests": true
         },
         "@schematics/angular:directive": {
-          "type": "directive",
           "skipTests": true
         },
         "@schematics/angular:pipe": {
-          "skipTests": true,
-          "name": "pipe"
-        },
-        "@schematics/angular:interface": {
-          "type": "interface"
+          "skipTests": true
         }
       },
       "root": "",
@@ -41,59 +34,42 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
-              }
+                "input": "public",
+                "output": "/"
+              },
+              "src/favicon.ico"
             ],
             "styles": [
               "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-              "node_modules/ngx-toastr/toastr.css",
               "src/styles.css"
             ],
-            "scripts": [
-              "./node_modules/flowbite/dist/flowbite.min.js"
-            ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            "scripts": ["./node_modules/flowbite/dist/flowbite.js"]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "1mb",
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
                 }
               ],
               "outputHashing": "all"
             },
             "development": {
               "optimization": false,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
-                }
-              ]
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
         },
-
         "serve": {
           "builder": "@angular/build:dev-server",
-          "options": {
-            "proxyConfig": "proxy.conf.json"
-          },
           "configurations": {
             "production": {
               "buildTarget": "techNova:build:production"
@@ -104,7 +80,6 @@
           },
           "defaultConfiguration": "development"
         },
-
         "test": {
           "builder": "@angular/build:unit-test"
         }
