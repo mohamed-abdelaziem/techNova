@@ -3,15 +3,15 @@
   <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
     <h1 class="text-xl md:text-2xl font-semibold text-blue-800">Competition Manager :</h1>
 
-    <div class="flex items-center gap-2">
+    <div class="flex items-center flex-wrap gap-2">
       <button
       (click)="ModelIsShow.set(true)"
-      class="flex items-center cursor-pointer justify-center gap-2 bg-blue-700 px-4 py-2 rounded text-white font-semibold hover:bg-blue-800 transition active:scale-95"
+      class="w-full md:w-fit flex items-center cursor-pointer justify-center gap-2 bg-blue-700 px-4 py-2 rounded text-white font-semibold hover:bg-blue-800 transition active:scale-95"
     >
       <i class="fa fa-plus"></i>
       Add Competition
     </button>
-            <input [value]="searchTerm" [(ngModel)]="searchTerm" type="search" id="search" class="block w-full md:w-1/2 p-2 ps-9 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded focus:ring-brand focus:border-brand shadow-xs placeholder:text-body" placeholder="Search Competition....." required />
+     <input [value]="searchTerm" [(ngModel)]="searchTerm" type="search" id="search" class="block w-full md:w-1/2 p-2 ps-9 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded focus:ring-brand focus:border-brand shadow-xs placeholder:text-body" placeholder="Search Competition....." required />
 
     </div>
   </div>
