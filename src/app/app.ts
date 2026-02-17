@@ -13,7 +13,7 @@ import { isPlatformBrowser } from '@angular/common';
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
-export class App implements OnInit {
+export class App  {
   protected readonly title = signal('techNova');
   private flowBiteService = inject(FlowbiteService);
   private authService = inject(AuthService);
@@ -26,13 +26,9 @@ export class App implements OnInit {
       this.authService.userRole.set(this.cookieService.get('userRole')!);
       console.log(this.authService.userRole())
     }
+     
+  }
   }
 
 
 
-  ngOnInit(): void {
-    this.flowBiteService.loadFlowbite((flowbite) => {
-      initFlowbite();
-    });
-  }
-}

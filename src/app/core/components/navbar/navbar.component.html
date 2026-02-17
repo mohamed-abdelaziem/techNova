@@ -82,13 +82,7 @@
               aria-labelledby="dropdownDividerButton-two"
             >
              @if (authService.userRole().toLowerCase() ==='admin') {
-               <li>
-                <a
-                  routerLink="/my-projects"
-                  class="cursor-pointer inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
-                  >The Projects</a
-                >
-              </li>
+               
              }@else{
                <li>
                 <a
@@ -145,13 +139,7 @@
         <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownDividerButton">
       
            @if (authService.userRole().toLowerCase() =='admin') {
-               <li>
-                <a
-                  routerLink="/my-projects"
-                  class="cursor-pointer inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
-                  >The Projects</a
-                >
-              </li>
+              
              }@else{
                <li>
                 <a
