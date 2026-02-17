@@ -76,11 +76,11 @@ this.getProjectsForTheCompetition(this.competitionId());
 makeWinner(id:number,rank:number,item:any){
 this.projectService.makeWinnered(id,rank).subscribe({
 next:(res)=>{
-  this.toast.success('Project Marked Winner Successfully');
   this.getProjectsForTheCompetition(this.competitionId());
+  this.toast.error('A project with rank 1 already exists for this competition.');
 },
 error:(err)=>{
-this.toast.error('A project with rank 1 already exists for this competition.');
+  this.toast.success('Project Marked Winner Successfully');
 this.getProjectsForTheCompetition(this.competitionId());
 }
 })

@@ -12,14 +12,16 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router, RouterLink } from '@angular/router';
 import { ICompetition } from '../../types/interfaces';
 import { DatePipe } from '@angular/common';
+import { SearchByTiTleOrDescriptionPipe } from '../../pipes/search-by-ti-tle-or-description-pipe';
 
 @Component({
   selector: 'app-competitions',
-  imports: [ReactiveFormsModule, FormsModule, DatePipe, RouterLink],
+  imports: [ReactiveFormsModule, FormsModule, DatePipe, RouterLink , SearchByTiTleOrDescriptionPipe],
   templateUrl: './competitions.component.html',
   styleUrl: './competitions.component.css',
 })
 export class CompetitionsComponent implements OnInit {
+  searchTerm : string = '';
   ModelIsShow = signal<boolean>(false);
   cookieService = inject(CookieService);
   competitionArr!: ICompetition[];
