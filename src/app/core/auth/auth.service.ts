@@ -4,8 +4,6 @@ import { Observable } from "rxjs";
 import { environment } from "../../../environments/environment.development";
 import { CookieService } from "ngx-cookie-service";
 import { IRegisterFormType } from './../types/interfaces';
-import { log } from "console";
-import { userInfo } from "os";
 import { Router } from "@angular/router";
 
 @Injectable({
@@ -43,14 +41,14 @@ userRole = signal<string>('student');
   }
 
 register(registerValues : IRegisterFormType):Observable<any>{
-return this.httpClient.post<any>(`/api/ProjectCompetition/register` , registerValues , {headers : {
+return this.httpClient.post<any>(`${environment.baseUrl}/register` , registerValues , {headers : {
 "content-type" : 'application/json'
 }});
 };
 
 
 login(loginForm : {email : string , password : string}){
-return this.httpClient.post(`/api/ProjectCompetition/login` , loginForm);
+return this.httpClient.post(`${environment.baseUrl}/login` , loginForm);
 }
 
 

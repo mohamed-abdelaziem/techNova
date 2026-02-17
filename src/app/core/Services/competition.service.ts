@@ -13,26 +13,26 @@ private http = inject(HttpClient);
 
 
 getAllCompetitons():Observable<ICompetition[]>{
-return this.http.get<ICompetition[]>(`/api/ProjectCompetition/GetAllCompetition`);
+return this.http.get<ICompetition[]>(`${environment.baseUrl}/GetAllCompetition`);
 }
 
 
 createCompetition(competitionValues : ICompetition){
-return this.http.post(`/api/ProjectCompetition/competition`,competitionValues);
+return this.http.post(`${environment.baseUrl}/competition`,competitionValues);
 }
 
 
 deleteCompetiton(id:number){
-return this.http.delete(`/api/ProjectCompetition/delete/${id}`);
+return this.http.delete(`${environment.baseUrl}/delete/${id}`);
 }
 
 getCompetitionById(id: number):Observable<ICompetition>{
-return this.http.get<ICompetition>(`/api/ProjectCompetition/competition/${id}`);
+return this.http.get<ICompetition>(`${environment.baseUrl}/competition/${id}`);
 }
 
 
 updateCompetition(competitionValues : any , id:number){
-return this.http.put(`/api/ProjectCompetition/update/${id}` , competitionValues);
+return this.http.put(`${environment.baseUrl}/update/${id}` , competitionValues);
 }
 
 
